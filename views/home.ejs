@@ -11,6 +11,14 @@
         </header>
         <main>
             <h1>Home</h1>
+            <ul>
+                <% for( let i = 0; i < movies.length; i++ ) { %>
+                <li>
+                    <a href="/movies/details/<%= movies[i].id %>"><%= movies[i].title %></a>
+                </li>
+                <% } %>
+        
+            </ul>
         </main>
         <footer>
 
