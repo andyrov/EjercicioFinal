@@ -10,14 +10,23 @@
 <body>    
     <h1><%= movie.title %> </h1>
     <br>
-    <p>NAME: <%= movie.title %> </p>
-    <p>RATING: <%= movie.rating %> </p>
+    <p>Titulo: <%= movie.title %> </p>
+    <p>Rating: <%= movie.rating %> </p>
     <% if (movie.genres !== null){ %>      
-    <p>GENRE: <%= movie.genres.name %> </p>
+    <p>Genero: <%= movie.genres.name %> </p>
     <% } %>
-    <p>ACTORS:</p>
+    <p>Actores:</p>
     <% for(let i= 0; i < movie.actors.length; i++){ %>
     <li> <%= movie.actors[i].first_name + " " + movie.actors[i].last_name %> </li>
+    <% } %>
+    <% if (movie.awards !== null){ %>
+    <p>Premios: <%= movie.awards %> </p>
+    <% } %>
+    <% if (movie.release_date !== null){ %>
+    <p>Lanzamiento: <%= movie.release_date %> </p>
+    <% } %>
+    <% if (movie.length !== null){ %>
+    <p>Duración: <%= movie.length %> min</p>
     <% } %>
 </body>
 </html>

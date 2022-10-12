@@ -34,12 +34,6 @@ const config = {
 
 const Actor_Movie = sequelize.define(alias, cols, config);
 
-Actor_Movie.associate = function (models) {
-
-    
-
-}
-
 return Actor_Movie
 
 }
