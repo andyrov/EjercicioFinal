@@ -15,7 +15,15 @@
     <br>
     <p>NAME: <%= movie.title %> </p>
     <p>RATING: <%= movie.rating %> </p>
+    <% if (movie.genres.name !== null){ %>      
     <p>GENRE: <%= movie.genres.name %> </p>
-
+    <% } %>
+    <% if (typeof movie.genres.name != "string"){ %>
+        <p>GENRE: Unknown </p>
+        <% } %>
+    <p>ACTORS:</p>
+    <% for(let i= 0; i < movie.actors.length; i++){ %>
+    <li> <%= movie.actors[i].first_name + " " + movie.actors[i].last_name %> </li>
+    <% } %>
 </body>
 </html>
