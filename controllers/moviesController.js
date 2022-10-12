@@ -1,5 +1,8 @@
 const db = require('../src/database/models');
 const sequelize = db.sequelize;
+const express = require('express');
+const app = express();
+
 
 
 
@@ -31,14 +34,15 @@ const moviesController = {
     'create': (req, res) => {
         let movie = {
             title: req.body.title,
-            genre: req.body.genre_id,
+            genre_id: req.body.genre_id,
             rating: req.body.rating,
             awards: req.body.awards,
+            release_date: req.body.release,
             length: req.body.length
         }
-        //console.log(movie)
-        //db.Movie.create(movie)
-        res.send(movie)
+        console.log(movie);
+        db.Movie.create(movie);
+        res.redirect('/');
     }
 }
 

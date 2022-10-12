@@ -6,6 +6,9 @@ const rutasHome = require('./routes/home');
 
 app.set('view engine', 'ejs')
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.listen(process.env.PORT || 5000 , function (){
     console.log("Servidor corriendo en el puerto 5000");
 });
