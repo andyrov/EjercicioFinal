@@ -6,6 +6,7 @@ const rutasHome = require('./routes/home');
 const methodOverride = require('method-override');
 
 
+
 app.set('view engine', 'ejs')
 
 app.use(express.json());
