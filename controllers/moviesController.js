@@ -60,6 +60,10 @@ const moviesController = {
         }
         db.Movie.update(movie, {where:{id: req.params.id}})
             .then(res.redirect('/movies/details/'+req.params.id))     
+    },
+    'delete': (req, res) => {
+        db.Movie.destroy({where:{id: req.params.id}})
+            .then(res.redirect('/'))
     }
 }
 
