@@ -40,9 +40,26 @@ const moviesController = {
             release_date: req.body.release,
             length: req.body.length
         }
-        console.log(movie);
         db.Movie.create(movie);
         res.redirect('/');
+    },
+    'edit': (req, res) => {
+        db.Movie.findByPk(req.params.id)
+            .then(Movie => {
+                res.render('moviesEdit.ejs', {Movie})
+            })
+    },
+    'update': (req, res) => {
+        let movie = {
+            title: req.body.title,
+            genre_id: req.body.genre_id,
+            rating: req.body.rating,
+            awards: req.body.awards,
+            release_date: req.body.release,
+            length: req.body.length
+        }
+        db.Movie.update(movie, {where:{id: req.params.id}})
+            .then(res.redirect('/movies/details/'+req.params.id))     
     }
 }
 

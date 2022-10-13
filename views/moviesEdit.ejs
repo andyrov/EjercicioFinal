@@ -12,39 +12,23 @@
 
     </header>
     <main>
-        <h1>Agregar pelicula</h1>
+        <h1>Editar: <%= Movie.title %></h1>
         <section>
-            <form action="/movies/create" method="POST">
+            <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
                 <label for="title">Titulo</label>
                 <p><input type="text" name="title" id="" required></p>
                 <label for="rating">Rating</label>
                 <p><input type="number" name="rating" id="" required></p>
-                <p>Genero</p>
-                <select name="genre_id">
-                    <option value="" disabled selected>Selecciona el genero</option>
-                    <% genres.forEach(genre=> { %>
-                        <option value="<%= genre.id %>">
-                            <%= genre.name %>
-                        </option>
-                        <% }); %>
-                </select>
-                <br>
-                <br>
                 <label for="awards">Premios</label>
                 <p><input type="number" name="awards" id="" required></p>
                 <label for="release">Lanzamiento</label>
                 <p><input type="date" name="release" id="" required></p>
                 <label for="length">Duración</label>
                 <p><input type="number" name="length" id="" required></p>
-                <p> <button type="submit">Agregar</button> </p>
+                <p> <button type="submit">Modificar</button> </p>
                 <br>
                 <a href="/"> Atras</a>
             </form>
         </section>
     </main>
     <footer>
-
-    </footer>
-</body>
-
-</html>
