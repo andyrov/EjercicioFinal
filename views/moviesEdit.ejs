@@ -25,6 +25,19 @@
                 <% if (locals.errors && errors.rating) { %>
                     <p style="color: red"><%= errors.rating.msg %></p>
                 <% } %>
+                <p>Genero</p>
+                <select name="genre_id">
+                    <option value="" disabled selected>Selecciona el genero</option>
+                    <% genres.forEach(genre=> { %>
+                        <option value="<%= genre.id %>">
+                            <%= genre.name %>
+                        </option>
+                        <% }); %>
+                </select>
+                <% if (locals.errors && errors.genre_id) { %>
+                    <p style="color: red"><%= errors.genre_id.msg %></p>
+                <% } %>
+                <br>
                 <br>
                 <label for="awards">Premios</label>
                 <p><input type="number" name="awards" id=""></p>

@@ -55,17 +55,22 @@ const moviesController = {
     'edit': (req, res) => {
         db.Movie.findByPk(req.params.id)
             .then(Movie => {
-                res.render('moviesEdit.ejs', { Movie })
+                db.Genre.findAll()
+                    .then(genres => {
+                        res.render('moviesEdit.ejs', {genres, Movie })
+                    })              
             })
     },
     'update': (req, res) => {
         const resultValidation = validationResult(req);
         db.Movie.findByPk(req.params.id)
             .then(Movie => {
-                if (resultValidation.errors.length > 0) {
-                    console.log('sexo')
-                    res.render('moviesEdit.ejs', { Movie, errors: resultValidation.mapped() })
+                db.Genre.findAll()
+                    .then(genres => {
+                        if (resultValidation.errors.length > 0) {
+                        res.render('moviesEdit.ejs', { Movie, genres, errors: resultValidation.mapped() })
                 }
+                                   
                 let movie = {
                     title: req.body.title,
                     genre_id: req.body.genre_id,
@@ -77,6 +82,7 @@ const moviesController = {
                 db.Movie.update(movie, { where: { id: req.params.id } })
                     .then(res.redirect('/movies/details/' + req.params.id))
             })
+        })
     },
     'delete': (req, res) => {
         db.Movie.destroy({ where: { id: req.params.id } })
