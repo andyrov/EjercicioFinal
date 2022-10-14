@@ -16,16 +16,32 @@
         <section>
             <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
                 <label for="title">Titulo</label>
-                <p><input type="text" name="title" id="" required></p>
+                <p><input type="text" name="title" id=""></p>
+                <% if (locals.errors && errors.title) { %>
+                    <p style="color: red"><%= errors.title.msg %></p>
+                <% } %>
                 <label for="rating">Rating</label>
-                <p><input type="number" name="rating" id="" required></p>
+                <p><input type="number" name="rating" id=""></p>
+                <% if (locals.errors && errors.rating) { %>
+                    <p style="color: red"><%= errors.rating.msg %></p>
+                <% } %>
+                <br>
                 <label for="awards">Premios</label>
-                <p><input type="number" name="awards" id="" required></p>
+                <p><input type="number" name="awards" id=""></p>
+                <% if (locals.errors && errors.awards) { %>
+                    <p style="color: red"><%= errors.awards.msg %></p>
+                <% } %>
                 <label for="release">Lanzamiento</label>
-                <p><input type="date" name="release" id="" required></p>
+                <p><input type="date" name="release" id=""></p>
+                <% if (locals.errors && errors.release) { %>
+                    <p style="color: red"><%= errors.release.msg %></p>
+                <% } %>
                 <label for="length">Duración</label>
-                <p><input type="number" name="length" id="" required></p>
-                <p> <button type="submit">Modificar</button> </p> 
+                <p><input type="number" name="length" id=""></p>
+                <% if (locals.errors && errors.length) { %>
+                    <p style="color: red"><%= errors.length.msg %></p>
+                <% } %>
+                <p> <button type="submit">Modificar</button> </p>
             </form>
             <form action="/movies/delete/<%= Movie.id %>?_method=DELETE" method="POST">
                 <button type="submit">Eliminar </button>

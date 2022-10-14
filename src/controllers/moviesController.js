@@ -59,16 +59,24 @@ const moviesController = {
             })
     },
     'update': (req, res) => {
-        let movie = {
-            title: req.body.title,
-            genre_id: req.body.genre_id,
-            rating: req.body.rating,
-            awards: req.body.awards,
-            release_date: req.body.release,
-            length: req.body.length
-        }
-        db.Movie.update(movie, { where: { id: req.params.id } })
-            .then(res.redirect('/movies/details/' + req.params.id))
+        const resultValidation = validationResult(req);
+        db.Movie.findByPk(req.params.id)
+            .then(Movie => {
+                if (resultValidation.errors.length > 0) {
+                    console.log('sexo')
+                    res.render('moviesEdit.ejs', { Movie, errors: resultValidation.mapped() })
+                }
+                let movie = {
+                    title: req.body.title,
+                    genre_id: req.body.genre_id,
+                    rating: req.body.rating,
+                    awards: req.body.awards,
+                    release_date: req.body.release,
+                    length: req.body.length
+                }
+                db.Movie.update(movie, { where: { id: req.params.id } })
+                    .then(res.redirect('/movies/details/' + req.params.id))
+            })
     },
     'delete': (req, res) => {
         db.Movie.destroy({ where: { id: req.params.id } })
