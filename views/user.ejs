@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title><%= User.name %></title>
+    <title><%= user.name %></title>
     <meta name="viewport" content="width=device-wid th">
     <meta charset="utf-8">
 </head>
@@ -12,11 +12,13 @@
 
     </header>
     <main>
-        <h1><%= User.name %></h1>
-        <h3>Email: <%= User.email %></h3>
+        <h1><%= user.name %></h1>
+        <h3>Email: <%= user.email %></h3>
+        <h3><a href="/users/logout">Logout</a></h3>
+        <br>
         <h3>Desea eliminar el usuario?</h3>
         <section>
-            <form action="/users/delete/<%= User.id %>?_method=DELETE" method="POST">
+            <form action="/users/delete/<%= user.id %>?_method=DELETE" method="POST">
                 <button type="submit">Eliminar</button>
             </form>
             <a href="/"> Atras</a>

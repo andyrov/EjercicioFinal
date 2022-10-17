@@ -33,10 +33,7 @@ const usersController = {
         return res.redirect('/users/login');
     },
     'userView': (req, res) => {
-        db.User.findByPk(req.params.id)
-            .then(User => {
-                res.render('user', { User })
-            })
+        res.render('user', { user: req.session.userLogged })
     },
     'delete': (req, res) => {
         db.User.destroy({ where: { id: req.params.id } })
@@ -51,7 +48,9 @@ const usersController = {
             .then(userToLogin => {
                 let passwordIsOk = bcrypt.compareSync(req.body.password, userToLogin.password)
                 if (passwordIsOk) {
-                    return res.send('Hola')
+                    delete userToLogin.password
+                    req.session.userLogged = userToLogin
+                    return res.redirect('/')
                 }
                 return res.render('login', {
                     errors: {
@@ -62,8 +61,12 @@ const usersController = {
                 })
             })
             .catch(error => {
-                return res.render('login', {error})
+                return res.render('login', { error })
             });
+    },
+    'logout': (req, res) => {
+        req.session.destroy();
+        return res.redirect('/')
     }
 }
 

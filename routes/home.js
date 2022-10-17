@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
+
+// Middlewares
 const movieValidations = require('../src/middlewares/validationsMovies');
 const registerValidations = require('../src/middlewares/validationsRegister');
 const loginValidations = require('../src/middlewares/validationsLogin');
+const guestMiddleware = require('../src/middlewares/guestMiddleware');
+const authMiddleware = require('../src/middlewares/authMiddleware');
+
+// Controllers
 const moviesController = require('../src/controllers/moviesController');
 const usersController = require('../src/controllers/usersController');
 
+// Movies routes
 router.get('/', moviesController.list);
 router.get('/movies/details/:id', moviesController.detail);
 router.get('/movies/add', moviesController.add);
@@ -14,11 +21,14 @@ router.get('/movies/edit/:id', moviesController.edit);
 router.put('/movies/update/:id', movieValidations, moviesController.update);
 router.delete('/movies/delete/:id', moviesController.delete);
 
-router.get('/users/register', usersController.register);
+
+// Users routes
+router.get('/users/register', guestMiddleware, usersController.register);
 router.post('/users/create', registerValidations, usersController.create);
-router.get('/users/details/:id', usersController.userView);
+router.get('/users/details/:id', authMiddleware, usersController.userView);
 router.delete('/users/delete/:id', usersController.delete);
-router.get('/users/login', usersController.login);
+router.get('/users/login', guestMiddleware, usersController.login);
 router.post('/users/loginProcess', loginValidations, usersController.loginProcess);
+router.get('/users/logout', usersController.logout)
 
 module.exports = router
