@@ -7,6 +7,7 @@ const registerValidations = require('../src/middlewares/validationsRegister');
 const loginValidations = require('../src/middlewares/validationsLogin');
 const guestMiddleware = require('../src/middlewares/guestMiddleware');
 const authMiddleware = require('../src/middlewares/authMiddleware');
+const adminMiddleware = require('../src/middlewares/adminMiddleware');
 
 // Controllers
 const moviesController = require('../src/controllers/moviesController');
@@ -15,11 +16,11 @@ const usersController = require('../src/controllers/usersController');
 // Movies routes
 router.get('/', moviesController.list);
 router.get('/movies/details/:id', moviesController.detail);
-router.get('/movies/add', moviesController.add);
+router.get('/movies/add', authMiddleware, adminMiddleware, moviesController.add);
 router.post('/movies/create', movieValidations, moviesController.create);
-router.get('/movies/edit/:id', moviesController.edit);
+router.get('/movies/edit/:id', authMiddleware, adminMiddleware, moviesController.edit);
 router.put('/movies/update/:id', movieValidations, moviesController.update);
-router.delete('/movies/delete/:id', moviesController.delete);
+router.delete('/movies/delete/:id', authMiddleware, adminMiddleware, moviesController.delete);
 
 
 // Users routes
