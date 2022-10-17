@@ -14,11 +14,21 @@
     <main>
         <h1>Login</h1>
         <section>
-            <form action="/users/login" method="POST">
+            <form action="/users/loginProcess" method="POST">
+                <% if (locals.errors && errors.name) { %>
+                    <p style="color: red"><%= errors.name.msg %></p>
+                <% } %>
+                <% if (locals.errors && errors.password) { %>
+                    <p style="color: red"><%= errors.password.msg %></p>
+                <% } %>
+                <% if (locals.error && error) { %>
+                    <p style="color: red">El usuario no esta registrado</p>
+                <% } %>
                 <label for="name">Nombre de usuario:</label>
                 <p><input type="text" name="name" id=""></p>
                 <label for="password">Contraseña:</label>
-                <p><input type="password" name="password" id=""></p>
+                <p><input type="password" name="password" id=""></p>              
+                <p> <button type="submit">Ingresar</button> </p>
                 <a href="/"> Atras</a>
             </form>
         </section>
