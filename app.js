@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
 const path = require ('path');
-const publicPath = path.resolve(__dirname, './public');
+const publicPath = path.resolve(__dirname, './src/public');
 const rutasHome = require('./routes/home');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const userLoggedMiddleware = require('./src/middlewares/userLoggedMiddleware');
 
-
+app.use(express.static(publicPath) );
 app.set('view engine', 'ejs')
 
 app.use(express.json());

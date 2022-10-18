@@ -14,7 +14,7 @@
     <main>
         <h1>Editar: <%= Movie.title %></h1>
         <section>
-            <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
+            <form class="edit" action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
                 <label for="title">Titulo</label>
                 <p><input type="text" name="title" id=""></p>
                 <% if (locals.errors && errors.title) { %>
@@ -56,7 +56,7 @@
                 <% } %>
                 <p> <button type="submit">Modificar</button> </p>
             </form>
-            <form action="/movies/delete/<%= Movie.id %>?_method=DELETE" method="POST">
+            <form class="delete" action="/movies/delete/<%= Movie.id %>?_method=DELETE" method="POST">
                 <button type="submit">Eliminar </button>
             </form>
             <br>
@@ -64,3 +64,4 @@
         </section>
     </main>
     <footer>
+        <script src="/js/edit.js"></script>
