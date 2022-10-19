@@ -38,6 +38,37 @@
                     <p style="color: red"><%= errors.genre_id.msg %></p>
                 <% } %>
                 <br>
+                <p>Actores</p>
+                <select name="actors1">
+                    <option value="actors">Selecciona el actor</option>
+                    <% actors.forEach(actors => { %>
+                        <option value="<%= actors.id %>">
+                            <%= actors.first_name + " " + actors.last_name %>
+                        </option>
+                        <% }); %>
+                </select>
+                <br>
+                <br>
+                <select name="actors2">
+                    <option value="actors">Selecciona el actor</option>
+                    <% actors.forEach(actors => { %>
+                        <option value="<%= actors.id %>">
+                            <%= actors.first_name + " " + actors.last_name %>
+                        </option>
+                        <% }); %>
+                </select>
+                <br>
+                <br>
+                <select name="actors3">
+                    <option value="actors">Selecciona el actor</option>
+                    <% actors.forEach(actors => { %>
+                        <option value="<%= actors.id %>">
+                            <%= actors.first_name + " " + actors.last_name %>
+                        </option>
+                        <% }); %>
+                </select>
+                <br>
+                <br>
                 <label for="awards">Premios</label>
                 <p><input type="number" name="awards" id=""></p>
                 <% if (locals.errors && errors.awards) { %>

@@ -19,7 +19,7 @@ router.get('/movies/details/:id', moviesController.detail);
 router.get('/movies/add', authMiddleware, adminMiddleware, moviesController.add);
 router.post('/movies/create', movieValidations, moviesController.create);
 router.get('/movies/edit/:id', authMiddleware, adminMiddleware, moviesController.edit);
-router.put('/movies/update/:id', movieValidations, moviesController.update);
+router.put('/movies/update', movieValidations, moviesController.update);
 router.delete('/movies/delete/:id', authMiddleware, adminMiddleware, moviesController.delete);
 
 

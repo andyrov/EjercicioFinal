@@ -14,43 +14,63 @@
     <main>
         <h1>Editar: <%= Movie.title %></h1>
         <section>
-            <form class="edit" action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
+            <form class="edit" action="/movies/update?_method=PUT" method="POST">
                 <label for="title">Titulo</label>
-                <p><input type="text" name="title" id=""></p>
+                <input name="id" value="<%= Movie.id %>" type="hidden">
+                <p><input type="text" name="title" value="<%=Movie.title%>"></p>
                 <% if (locals.errors && errors.title) { %>
                     <p style="color: red"><%= errors.title.msg %></p>
                 <% } %>
                 <label for="rating">Rating</label>
-                <p><input type="number" name="rating" id=""></p>
+                <p><input type="number" name="rating" value="<%=Movie.rating%>"></p>
                 <% if (locals.errors && errors.rating) { %>
                     <p style="color: red"><%= errors.rating.msg %></p>
                 <% } %>
                 <p>Genero</p>
                 <select name="genre_id">
-                    <option value="" disabled selected>Selecciona el genero</option>
+                    
                     <% genres.forEach(genre=> { %>
+                        <% if (genre.id == Movie.genre_id) {%> 
+                        <option value="<%= genre.id %>"  selected><%= genre.name %></option>                    
+                        <% } else { %>
                         <option value="<%= genre.id %>">
                             <%= genre.name %>
                         </option>
+                        <% } %>
                         <% }); %>
                 </select>
                 <% if (locals.errors && errors.genre_id) { %>
                     <p style="color: red"><%= errors.genre_id.msg %></p>
                 <% } %>
                 <br>
-                <br>
+                <p>Actores</p>
+                <% for(let i= 0; i < Movie.actors.length; i++){ %>
+                    <select name="actors<%= i + 1 %>">                 
+                        <% actors.forEach(actor => { %>
+                            <% if (actor.id == Movie.actors[i].id) {%> 
+                                <option value="<%= Movie.actors[i].id %>"  selected><%= Movie.actors[i].first_name + " " + Movie.actors[i].last_name%></option>                    
+                                <% } else { %> 
+                            <option value="<%= actor.id %>">
+                                <%= actor.first_name + " " + actor.last_name %>
+                            </option>
+                            <% } %>
+                            <% }); %>
+                    </select>
+                    <br>
+                    <br>
+                    <% } %>
                 <label for="awards">Premios</label>
-                <p><input type="number" name="awards" id=""></p>
+                <p><input type="number" name="awards" value="<%=Movie.awards%>"></p>
                 <% if (locals.errors && errors.awards) { %>
                     <p style="color: red"><%= errors.awards.msg %></p>
                 <% } %>
                 <label for="release">Lanzamiento</label>
-                <p><input type="date" name="release" id=""></p>
+                <p><input type="date" name="release" value="<%=Movie.release_date%>"></p>
                 <% if (locals.errors && errors.release) { %>
                     <p style="color: red"><%= errors.release.msg %></p>
                 <% } %>
                 <label for="length">Duración</label>
-                <p><input type="number" name="length" id=""></p>
+                <p><input type="number" name="length" value="<%=Movie.length%>"></p>
                 <% if (locals.errors && errors.length) { %>
                     <p style="color: red"><%= errors.length.msg %></p>
                 <% } %>
@@ -64,4 +84,3 @@
         </section>
     </main>
     <footer>
-        <script src="/js/edit.js"></script>
